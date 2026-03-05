@@ -8,7 +8,7 @@ if (-not (Test-Path $InputCsv)) {
   exit 1
 }
 
-$rows = Import-Csv -Path $InputCsv -Delimiter ";"
+$rows = Import-Csv -Path $InputCsv 
 if (-not $rows -or $rows.Count -eq 0) {
   Write-Error "No rows found in: $InputCsv"
   exit 1
@@ -71,3 +71,4 @@ foreach ($r in $rows) {
 
 Set-Content -Path $OutputTxt -Value $lines -Encoding UTF8
 Write-Host "Generated messages: $OutputTxt"
+
