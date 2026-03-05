@@ -1,5 +1,7 @@
 # Client Lead Workspace 🚀
 
+![Phoenix 24K Sender Design](phoenix.png)
+
 Organized lead-generation workspace with ready CSV files, automation scripts, and execution docs. 📁
 
 ## Main Folder Files 📂
