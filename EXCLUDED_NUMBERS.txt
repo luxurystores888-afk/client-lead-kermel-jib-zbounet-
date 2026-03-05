@@ -1,0 +1,3 @@
++96170000000
+# Paste old/existing contacts here (one number per line).
+# Any number here will be skipped by OPEN_WHATSAPP_TABS.ps1

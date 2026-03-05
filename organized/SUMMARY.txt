@@ -1,0 +1,14 @@
+﻿Total leads: 1000
+Mobile leads: 277
+
+By area:
+- Abu Dhabi: 121
+- Ajman: 57
+- Al Ain: 13
+- Dibba: 1
+- Dubai: 633
+- Fujairah: 8
+- Jebel Ali: 36
+- Ras Al Khaimah: 11
+- Sharjah: 108
+- Umm Al Quwain: 12
