@@ -26,7 +26,7 @@ function Normalize-Phone {
   return $digits
 }
 
-$rows = Import-Csv -Path $InputCsv 
+$rows = Import-Csv -Path $InputCsv
 $opened = 0
 
 $excluded = @{}
@@ -67,4 +67,3 @@ Write-Host "Opened $opened WhatsApp tab(s)."
 if ($opened -eq 0) {
   Write-Host "Tip: fill phone_or_link with valid new numbers, keep status = NEW, and check EXCLUDED_NUMBERS.txt."
 }
-

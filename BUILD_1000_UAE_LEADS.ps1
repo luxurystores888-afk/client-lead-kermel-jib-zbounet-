@@ -15,12 +15,12 @@ function Normalize-UaePhone {
   $p = $Phone.Trim()
   $p = $p -replace "[^0-9+]", ""
 
-  if ($p -match "^00971") { $p = " 00971" + $p.Substring(5) }
-  elseif ($p -match "^971") { $p = " 00$p" }
-  elseif ($p -match "^0\d+") { $p = " 00971" + $p.Substring(1) }
-  elseif ($p -match "^\d+") { $p = " 00$p" }
+  if ($p -match "^00971") { $p = "+971" + $p.Substring(5) }
+  elseif ($p -match "^971") { $p = "+$p" }
+  elseif ($p -match "^0\d+") { $p = "+971" + $p.Substring(1) }
+  elseif ($p -match "^\d+") { $p = "+$p" }
 
-  if ($p -notmatch "^ 00971\d{7,9}$") { return $null }
+  if ($p -notmatch "^\+971\d{7,9}$") { return $null }
   return $p
 }
 
@@ -85,7 +85,7 @@ function Parse-ProfilePage {
 
   $rows = @()
   foreach ($p in $phones) {
-    $phoneType = if ($p -match '^\ 009715\d{8}$') { 'mobile' } else { 'landline_or_tollfree' }
+    $phoneType = if ($p -match '^\+9715\d{8}$') { 'mobile' } else { 'landline_or_tollfree' }
     $rows += [pscustomobject]@{
       date          = (Get-Date -Format 'yyyy-MM-dd')
       lead_name     = $name
@@ -146,8 +146,5 @@ if ($final.Count -gt $Target) {
   $final = $final | Select-Object -First $Target
 }
 
-$final | Export-Csv -Path $OutCsv  -NoTypeInformation -Encoding UTF8
+$final | Export-Csv -Path $OutCsv -NoTypeInformation -Encoding UTF8
 Write-Host "Saved $($final.Count) leads to $OutCsv"
-
-
-
