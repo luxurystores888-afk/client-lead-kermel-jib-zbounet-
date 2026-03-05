@@ -1,4 +1,6 @@
-﻿Total leads: 1000
+﻿خلاصة سحب الزبائن وأعدادهم:
+-----------------------------------
+Total leads: 1000
 Mobile leads: 277
 
 By area:
@@ -12,3 +14,4 @@ By area:
 - Ras Al Khaimah: 11
 - Sharjah: 108
 - Umm Al Quwain: 12
+
