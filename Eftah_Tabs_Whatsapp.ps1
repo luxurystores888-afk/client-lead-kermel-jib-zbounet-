@@ -1,5 +1,5 @@
-param(
-  [string]$InputCsv = ".\\LEADS_TRACKER.csv",
+﻿param(
+  [string]$InputXlsx = ".\Zabayen_Emarat_VIP.xlsx",
   [int]$MaxTabs = 8,
   [string]$ExcludeFile = ".\\EXCLUDED_NUMBERS.txt",
   [switch]$OnlyUaeMobile
@@ -7,8 +7,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-if (-not (Test-Path $InputCsv)) {
-  Write-Error "Input CSV not found: $InputCsv"
+if (-not (Test-Path $InputXlsx)) {
+  Write-Error "Input CSV not found: $InputXlsx"
   exit 1
 }
 
@@ -26,7 +26,28 @@ function Normalize-Phone {
   return $digits
 }
 
-$rows = Import-Csv -Path $InputCsv
+# Read from Excel COM Object
+$excel = New-Object -ComObject Excel.Application
+$excel.Visible = $false
+$workbook = $excel.Workbooks.Open((Resolve-Path $InputXlsx).FullName)
+$worksheet = $workbook.Worksheets.Item(1)
+$lastRow = $worksheet.UsedRange.Rows.Count
+$rows = @()
+for ($i = 2; $i -le $lastRow; $i++) {
+    $rows += [PSCustomObject]@{
+        date = $worksheet.Cells.Item($i, 1).Text
+        lead_name = $worksheet.Cells.Item($i, 2).Text
+        business = $worksheet.Cells.Item($i, 3).Text
+        area = $worksheet.Cells.Item($i, 4).Text
+        phone_or_link = $worksheet.Cells.Item($i, 5).Text
+        channel = $worksheet.Cells.Item($i, 6).Text
+        status = $worksheet.Cells.Item($i, 7).Text
+        notes = $worksheet.Cells.Item($i, 8).Text
+    }
+}
+$workbook.Close($false)
+$excel.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null 
 $opened = 0
 
 $excluded = @{}
@@ -67,3 +88,5 @@ Write-Host "Opened $opened WhatsApp tab(s)."
 if ($opened -eq 0) {
   Write-Host "Tip: fill phone_or_link with valid new numbers, keep status = NEW, and check EXCLUDED_NUMBERS.txt."
 }
+
+
