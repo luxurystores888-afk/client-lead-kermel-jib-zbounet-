@@ -146,5 +146,5 @@ if ($final.Count -gt $Target) {
   $final = $final | Select-Object -First $Target
 }
 
-$final | Export-Csv -Path $OutCsv -NoTypeInformation -Encoding UTF8
+$final | Export-Csv -Path $OutCsv -Delimiter ";" -NoTypeInformation -Encoding UTF8
 Write-Host "Saved $($final.Count) leads to $OutCsv"

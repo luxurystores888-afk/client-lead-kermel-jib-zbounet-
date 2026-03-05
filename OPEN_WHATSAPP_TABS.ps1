@@ -26,7 +26,7 @@ function Normalize-Phone {
   return $digits
 }
 
-$rows = Import-Csv -Path $InputCsv
+$rows = Import-Csv -Path $InputCsv -Delimiter ";"
 $opened = 0
 
 $excluded = @{}

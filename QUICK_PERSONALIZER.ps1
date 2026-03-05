@@ -8,7 +8,7 @@ if (-not (Test-Path $InputCsv)) {
   exit 1
 }
 
-$rows = Import-Csv -Path $InputCsv
+$rows = Import-Csv -Path $InputCsv -Delimiter ";"
 if (-not $rows -or $rows.Count -eq 0) {
   Write-Error "No rows found in: $InputCsv"
   exit 1
